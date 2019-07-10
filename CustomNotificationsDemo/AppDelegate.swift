@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logData += "\nDid Finish Launch"
         NotificationManager.shared.requestNotificationAuth()
         
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (_) in
-            print(logData)
-        }
+//        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (_) in
+//            print(logData)
+//        }
         
         return true
     }
