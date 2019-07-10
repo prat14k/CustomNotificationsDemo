@@ -12,6 +12,7 @@
 		AB89CD8222D5E992001316B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB89CD8022D5E992001316B6 /* Main.storyboard */; };
 		AB89CD8422D5E993001316B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB89CD8322D5E993001316B6 /* Assets.xcassets */; };
 		AB89CD8722D5E993001316B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB89CD8522D5E993001316B6 /* LaunchScreen.storyboard */; };
+		AB89CD9022D5F6B8001316B6 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89CD8F22D5F6B8001316B6 /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		AB89CD8622D5E993001316B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB89CD8822D5E993001316B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB89CD8E22D5ED8C001316B6 /* CustomNotificationsDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CustomNotificationsDemo.entitlements; sourceTree = "<group>"; };
+		AB89CD8F22D5F6B8001316B6 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				AB89CD8322D5E993001316B6 /* Assets.xcassets */,
 				AB89CD8522D5E993001316B6 /* LaunchScreen.storyboard */,
 				AB89CD8822D5E993001316B6 /* Info.plist */,
+				AB89CD8F22D5F6B8001316B6 /* NotificationManager.swift */,
 			);
 			path = CustomNotificationsDemo;
 			sourceTree = "<group>";
@@ -99,6 +102,9 @@
 					AB89CD7822D5E992001316B6 = {
 						CreatedOnToolsVersion = 10.2;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -142,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB89CD9022D5F6B8001316B6 /* NotificationManager.swift in Sources */,
 				AB89CD7F22D5E992001316B6 /* ViewController.swift in Sources */,
 				AB89CD7D22D5E992001316B6 /* AppDelegate.swift in Sources */,
 			);

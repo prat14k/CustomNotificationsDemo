@@ -9,46 +9,36 @@
 import UIKit
 import UserNotifications
 
+var logData: String = "Log Data"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var timer: Timer?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        print("Did Finish Launch")
+        logData += "\nDid Finish Launch"
+        NotificationManager.shared.requestNotificationAuth()
         
-        registerNotifications()
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (_) in
+            print(logData)
+        }
+        
         return true
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let token = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print(token)
-    }
     
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print(error)
-    }
 }
 
 extension AppDelegate {
     
-    func registerNotifications() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { [weak self] (isGranted, error) in
-            print(isGranted)
-            DispatchQueue.main.async {
-                if isGranted {
-                    self?.getNotificationSettings()
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            }
-        }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        NotificationManager.shared.didRecieve(deviceToken: deviceToken)
     }
-
-    func getNotificationSettings() {
-        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings) in
-            print(settings)
-        })
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        NotificationManager.shared.didFailToRegister(error: error)
     }
 }
-
