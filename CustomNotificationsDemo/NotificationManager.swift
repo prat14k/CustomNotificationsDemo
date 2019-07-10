@@ -13,8 +13,10 @@ class NotificationManager: NSObject {
     
     static let shared = NotificationManager()
     private var token: String?
-    
-    
+    private var center: UNUserNotificationCenter {
+        return UNUserNotificationCenter.current()
+    }
+
 }
 
 extension NotificationManager {
@@ -29,7 +31,7 @@ extension NotificationManager {
     }
     
     func requestNotificationAuth() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { [weak self] (isGranted, error) in
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { [weak self] (isGranted, error) in
             print("APNS Request Successful: \(isGranted)")
             DispatchQueue.main.async {
                 if isGranted {
@@ -42,11 +44,14 @@ extension NotificationManager {
     
     private func registerForNotifications() {
         UIApplication.shared.registerForRemoteNotifications()
-        UNUserNotificationCenter.current().delegate = self
+        center.delegate = self
+        let notifAction = UNNotificationAction(identifier: "action1", title: "Action 1", options: [.foreground])
+        let category = UNNotificationCategory(identifier: "category", actions: [notifAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: nil, categorySummaryFormat: nil, options: [])
+        center.setNotificationCategories(Set([category]))
     }
     
     func getNotificationSettings() {
-        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings) in
+        center.getNotificationSettings(completionHandler: { (settings) in
             print(settings)
         })
     }
